@@ -1,7 +1,7 @@
 {
   "name": "com.cdevlib.stickdirectiondescriptors",
 
-  "version": "0.1.0",
+  "version": "0.2.1",
 
   "displayName": "Stick Direction Inspector Controls",
   "description": "Contains a StickDirectionDescriptor class with a property drawer for describing joystick inputs",
