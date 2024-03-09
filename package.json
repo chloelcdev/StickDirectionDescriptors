@@ -1,0 +1,31 @@
+{
+  "name": "com.cdevlib.stickdirectiondescriptors",
+
+  "version": "0.1.0",
+
+  "displayName": "Stick Direction Inspector Controls",
+  "description": "Contains a StickDirectionDescriptor class with a property drawer for describing joystick inputs",
+
+  "unity": "2022.3",
+  "unityRelease": "9f1",
+
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  
+  "dependencies": {},
+
+  "keywords": [
+     "Gamepad",
+     "Stick",
+     "Direction",
+     "JoyStick",
+     "Input"
+   ],
+
+   "author": {
+     "name": "ChloeNow",
+     "email": "chloelcdev@gmail.com",
+     "url": ""
+   }
+}
