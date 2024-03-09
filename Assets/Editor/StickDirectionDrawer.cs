@@ -61,6 +61,7 @@ public class StickDirectionDrawer : PropertyDrawer
         DrawMainArc(circleRect, angle, tolerance, Color.green, deadzone);
         propRect.yMin = circleRect.yMax + propertySpacing;
 
+
         // just draws the basic float properties and [range] sliders (yum...)
         DrawBasicProperties(propRect, property);
 
@@ -73,10 +74,11 @@ public class StickDirectionDrawer : PropertyDrawer
 
     void DrawBasicProperties(Rect propRect, SerializedProperty property)
     {
+        EditorGUIUtility.labelWidth = 64;
         propRect.yMax = propRect.yMin + EditorGUI.GetPropertyHeight(property.FindPropertyRelative("angle")) + propertySpacing;
 
         EditorGUI.PropertyField(propRect, property.FindPropertyRelative("angle"), new GUIContent("Angle"));
-
+        
         propRect.yMin += EditorGUI.GetPropertyHeight(property.FindPropertyRelative("angle")) + propertySpacing;
         propRect.yMax = propRect.yMin + EditorGUI.GetPropertyHeight(property.FindPropertyRelative("tolerance")) + propertySpacing;
 
@@ -143,11 +145,19 @@ public class StickDirectionDrawer : PropertyDrawer
         var radius = CircleRadius; 
 
         var center = rect.center;
-        var startDirection = Quaternion.AngleAxis(angle - halfTolerance, Vector3.back) * Vector3.right;
-        var endDirection = Quaternion.AngleAxis(angle + halfTolerance, Vector3.back) * Vector3.right;
+        angle = (angle + 360) % 360;
+
+        var startDirAng = angle - halfTolerance;
+        startDirAng = (startDirAng + 360) % 360;
+
+        var endDirAng = angle + halfTolerance;
+        endDirAng = (endDirAng + 360) % 360;
+
+        var startDirection = Quaternion.AngleAxis(startDirAng, Vector3.back) * Vector3.right;
+        var endDirection = Quaternion.AngleAxis(endDirAng, Vector3.back) * Vector3.right;
 
         // Calculate arc angle from direction vectors
-        var arcAngle = Vector3.SignedAngle(startDirection, endDirection, Vector3.back);
+        var arcAngle = coneAngle;// = Vector3.SignedAngle(startDirection, endDirection, Vector3.back);
 
         // Draw the arcs dark far edge (which is the actual full arc, just dark), lerp color to not affect alpha
         Handles.color = Color.Lerp(Color.black, color, 0.8f);
